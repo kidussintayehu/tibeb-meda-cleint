@@ -23,9 +23,11 @@ const Products = ({ cat, filters, sort }) => {
           :false)
         const res = await axios.get(
           cat
+
           ? `https://tibebmeda.herokuapp.com/api/products?catagory=${cat}`
           : "https://tibebmeda.herokuapp.com/api/products"
       );
+
         setProducts(res.data);
       console.log(res.data);
 

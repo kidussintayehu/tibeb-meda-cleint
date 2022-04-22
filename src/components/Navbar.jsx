@@ -6,6 +6,9 @@ import { Badge } from '@material-ui/core';
 import { mobile } from '../responsive'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { Logout } from "../redux/apiCalls";
+
 const Container = styled.div`
     height: 60px;
     ${mobile({ "height": "50px" })}
@@ -64,47 +67,63 @@ const MenuItem = styled.div`
     margin-left : 25px;
     ${mobile({ "font-size": "12px" })}
 `
-
+const SignOutButton = styled.button`
+    font-size : 12px;
+    padding: 5px 5px 5px 5px;
+    border: none;
+    margin-left : 2vw;
+    cursor : pointer;
+`
 
 const Navbar = () => {
     const quantity = useSelector(state => state.cart.quantity)
+    const dispatch = useDispatch();
+    const handleClick = (e) => {
+        e.preventDefault();
+        Logout(dispatch);
+        console.log("loged out")
+    }
     return (
         < Container >
-        <Wrapper>
-            <Left>
-                <ChageLanguage>EN</ChageLanguage>
-                <SearchContainer>
-                    <Input />
-                    <Search style={{ color: "grey", fontSize: "16px" }} />
-                </SearchContainer>
-            </Left>
-            <Center>
-                
-                <Logo >
-                    TIBEBE MEDA
-                </Logo>
-               
-                
-            </Center>
-            <Right>
+            <Wrapper>
+                <Left>
+                    <ChageLanguage>EN</ChageLanguage>
+                    <SearchContainer>
+                        <Input />
+                        <Search style={{ color: "grey", fontSize: "16px" }} />
+                    </SearchContainer>
+                </Left>
+                <Center>
 
-                <Link to="/register">
-                <MenuItem>REGISTER</MenuItem>
-                </Link>
-                <Link to="/login">
-                <MenuItem>SIGN IN</MenuItem>
-                </Link>
+                    <Logo >
+                        TIBEBE MEDA
+                    </Logo>
 
-               
-                <Link to="/cart">
-                <MenuItem>
-                    <Badge badgeContent={quantity} color="primary">
-                        <ShoppingCartOutlined />
-                    </Badge>
-                </MenuItem>
-                </Link>
-            </Right>
-        </Wrapper>
+
+                </Center>
+                <Right>
+
+                    <Link to="/register">
+                        <MenuItem>REGISTER</MenuItem>
+                    </Link>
+                    <Link to="/login">
+                        <MenuItem>SIGN IN</MenuItem>
+                    </Link>
+                    <SignOutButton
+                        onClick={handleClick}
+                    >
+                        SIGN OUT
+                    </SignOutButton>
+
+                    <Link to="/cart">
+                        <MenuItem>
+                            <Badge badgeContent={quantity} color="primary">
+                                <ShoppingCartOutlined />
+                            </Badge>
+                        </MenuItem>
+                    </Link>
+                </Right>
+            </Wrapper>
         </Container >
     );
 }

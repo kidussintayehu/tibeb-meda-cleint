@@ -1,9 +1,7 @@
 import { Send } from "@material-ui/icons";
 import styled from "styled-components";
-import { Logout } from "../redux/apiCalls";
 import { mobile } from "../responsive";
 // import { mobile } from "../responsive";
-import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   height: 60vh;
@@ -48,17 +46,10 @@ const Button = styled.button`
   background-color: teal;
   color: white;
 `;
-const SignOutButton = styled.button`
-  position : relative;
-  margin-right : 93vw;
-`
+
+
 const Newsletter = () => {
-  const dispatch = useDispatch();
-  const handleClick = (e) => {
-    e.preventDefault();
-    Logout(dispatch);
-    console.log("loged out")
-  }
+ 
   return (
     <Container>
       <Title>Newsletter</Title>
@@ -70,11 +61,7 @@ const Newsletter = () => {
         </Button>
        
       </InputContainer>
-      <SignOutButton
-        onClick={handleClick}
-        >
-          SIGN OUT
-        </SignOutButton>
+ 
     </Container>
   );
 };

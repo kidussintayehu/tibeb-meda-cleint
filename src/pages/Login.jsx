@@ -75,6 +75,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.user);
   const Navigate = useNavigate
+  const [message, setmessage] = useState("");
 
       console.log("error outside button" ,error)
       // console.log(isFetching)
@@ -86,6 +87,9 @@ const Login = () => {
       console.log(error === false)
       if(error === false){
         Navigate("/")
+      }
+      else{
+        setmessage("something is wrong")
       }
     } catch (error) {
       
@@ -113,7 +117,7 @@ const Login = () => {
     }>
             LOGIN
           </Button>
-          {error && <Error>Something went wrong...</Error>}
+         <Error>{message}</Error>
           <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>

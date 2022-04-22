@@ -17,7 +17,7 @@ import Register from "./pages/Register";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const user = useSelector((state) => state.user.currentUser);
+  const  user = useSelector((state) => state.user.currentUser);
   console.log("user",user);
   return (
     <BrowserRouter>
@@ -42,12 +42,12 @@ const App = () => {
           element={<Success />}
         />
         <Route path="/login" element={
-          !user ? <Home />
+          user ? <Home />
             : <Login />
         }>
         </Route>
         <Route path="/register" element={
-          !user ? <Home />
+          user ? <Home />
             : <Register />
         }>
         </Route>
